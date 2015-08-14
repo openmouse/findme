@@ -17,15 +17,17 @@
 					<span class="fa fa-quote-left "></span> 登录 <span class="fa fa-quote-right "></span>
 				</h2>
 	            <div>
-	                <input id="username" type="text" placeholder="登录账号"/>
-	                <input id="password" type="password" placeholder="输入密码" >
-	
-					<div class="buttonwrapper">
-						<button id="loginbtn" class="btn btn-warning loginbutton">
-							<span class="fa fa-check"></span>
-						</button>
-						<span id="lockbtn" class="fa fa-lock lockbutton redborder"></span>
-					</div>
+		            <form id="loginForm" action="submit.htm" method="post">
+		                <input id="username" type="text" placeholder="登录账号"/>
+		                <input id="password" type="password" placeholder="输入密码" >
+		
+						<div class="buttonwrapper">
+							<button id="loginbtn" class="btn btn-warning loginbutton">
+								<span class="fa fa-check"></span>
+							</button>
+							<span id="lockbtn" class="fa fa-lock lockbutton redborder"></span>
+						</div>
+					</form>
 	            </div>
 	        </div>
 	    </div>
