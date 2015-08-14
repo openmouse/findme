@@ -12,9 +12,13 @@ public class LoginController {
 	@Autowired
 	private LoginService loginService;
 
+	@RequestMapping(value="/login")
+	public String login(){
+		return "/login/login";
+	}
+	
 	@RequestMapping(value="/index")
 	public String index(){
-		//TODO
 		return "index";
 	}
 }
