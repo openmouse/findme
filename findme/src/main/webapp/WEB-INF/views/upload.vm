@@ -1,14 +1,40 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head><meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"><meta name="renderer" content="webkit" />
-<link rel="icon" href="${setting.shopSiteUrl}/favicon.ico" type="image/x-icon" />
-<link rel="shortcut icon" href="${setting.shopSiteUrl}/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="#base()/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="#base()/favicon.ico" type="image/x-icon" />
+<link href="#static()/css/upload.css" rel="stylesheet" type="text/css" />
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title>上传excel</title>
 <meta name="author" content="kelansi Team" />
 <meta name="copyright" content="kelansi" />
-<script src="#static()/lib/requireJS/require.js"  data-main="/findme/static/resources/upload/main"></script>
+
 </head>
 <body>
+	<div style="width:500px;padding:20px">
+ 
+    <input id="fileupload" type="file" name="files[]" data-url="upload.htm" multiple>
+ 
+    <div id="dropzone">Drop files here</div>
+ 
+    <div id="progress">
+        <div style="width: 0%;"></div>
+    </div>
+ 
+    <table id="uploaded-files">
+        <tr>
+            <th>File Name</th>
+            <th>File Size</th>
+            <th>File Type</th>
+            <th>Download</th>
+        </tr>
+    </table>
+ 
+</div>
 </body>
+<script src="#static()/lib/jquery/jquery-1.11.3.js"></script>
+<script src="#static()/lib/fileupload/js/jquery.iframe-transport.js" ></script>
+<script src="#static()/lib/fileupload/js/vendor/jquery.ui.widget.js" ></script>
+<script src="#static()/lib/fileupload/js/jquery.fileupload.js"></script>
+<script src="#static()/upload/upload.js"></script>
 </html>

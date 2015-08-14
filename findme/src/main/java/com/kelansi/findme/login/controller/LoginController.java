@@ -1,20 +1,44 @@
 package com.kelansi.findme.login.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kelansi.findme.bean.Message;
+import com.kelansi.findme.domain.Admin;
 import com.kelansi.findme.login.service.LoginService;
 
 @Controller
 public class LoginController {
 	
+	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
+	
 	@Autowired
 	private LoginService loginService;
 
+	@RequestMapping(value="/login")
+	public String login(){
+		return "/login/login";
+	}
+	
+	@RequestMapping(value="/submit")
+	@ResponseBody
+	public Message submit(String username, HttpServletRequest request, HttpServletResponse response){
+		HttpSession session = request.getSession();
+		session.setAttribute(Admin.ADMIN_SESSION_ATTR, new Object());
+		logger.info("login success");
+		return Message.SUCCESS_MESSAGE;
+	}
+	
 	@RequestMapping(value="/index")
 	public String index(){
-		//TODO
 		return "index";
 	}
 }

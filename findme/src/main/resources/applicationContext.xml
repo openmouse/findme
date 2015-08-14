@@ -44,7 +44,7 @@
                 <prop key="directive.foreach.counter.initial.value">0</prop>
                 <prop key="input.encoding">UTF-8</prop><!-- 指定模板引擎进行模板处理的编码 -->
                 <prop key="output.encoding">UTF-8</prop><!-- 指定输出流的编码 -->
-                <prop key="runtime.log.logsystem.class">com.kelansi.findme.utils.Slf4jLogCute</prop>
+              
             </props>
         </property>
     </bean>
@@ -58,6 +58,7 @@
 	</bean>
 	
 	<bean class="com.hengtiansoft.xyl.utils.SpringUtils" lazy-init="false"/> -->
+	<bean class="com.kelansi.findme.utils.SpringUtils" lazy-init="false"/>
 
 	<import resource="classpath*:applicationContext-db.xml" />
 </beans>
