@@ -7,7 +7,7 @@
 <title>上传excel</title>
 <meta name="author" content="kelansi Team" />
 <meta name="copyright" content="kelansi" />
-<script src="/findme/static/resources/lib/requireJS/require.js"  data-main="/findme/static/resources/upload/main"></script>
+<script src="#static()/lib/requireJS/require.js"  data-main="/findme/static/resources/upload/main"></script>
 </head>
 <body>
 </body>
