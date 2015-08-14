@@ -1,0 +1,26 @@
+<configuration>
+	<contextName>findme</contextName>
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{MMdd.HHmmss} [%-22t] %-5p L:%-3L %-22c{0} - %m%n</pattern>
+		</encoder>
+	</appender>
+	<appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	    <Encoding>UTF-8</Encoding>
+		<encoder>
+			<pattern>%d{MMdd.HHmmss} [%-22t] %-5p L:%-3L %-22c{0} - %m%n</pattern>
+		</encoder>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>../logs/searchCenter.%d{yyyyMMdd}.log</fileNamePattern>
+		</rollingPolicy>
+	</appender>
+	
+	<root level="error">
+		<appender-ref ref="console" />
+	</root>
+	<logger name="com.kelansi.findme" level="error">
+		<appender-ref ref="file" />
+	</logger>
+	
+</configuration>
