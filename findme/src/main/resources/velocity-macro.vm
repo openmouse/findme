@@ -1,0 +1,7 @@
+#macro( base )
+/findme
+#end
+
+#macro( static )
+/findme/static/resources
+#end
