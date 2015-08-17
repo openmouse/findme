@@ -1,17 +1,12 @@
 package com.kelansi.findme.upload.controller;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,8 +17,6 @@ import com.kelansi.findme.common.Message;
 import com.kelansi.findme.common.ResultData;
 import com.kelansi.findme.exception.CommonException;
 import com.kelansi.findme.upload.service.UploadService;
-import com.kelansi.findme.utils.excel.ExcelReader;
-import com.kelansi.findme.utils.excel.ExcelReaderFactory;
 
 @Controller
 @RequestMapping(value="/upload")
@@ -79,7 +72,7 @@ public class UploadController {
 	        return files;
 	    }*/
 	@RequestMapping(value="/upload", method = RequestMethod.POST)
-    public @ResponseBody ResultData upload(MultipartHttpServletRequest mulRequest, HttpServletResponse response) {
+    /*public @ResponseBody ResultData upload(MultipartHttpServletRequest mulRequest, HttpServletResponse response) {
 		 Iterator<String> itr =  mulRequest.getFileNames();
          MultipartFile file = null;
          ResultData result=new ResultData();
@@ -99,7 +92,7 @@ public class UploadController {
              } 
          }
          return result;
-	}
+	}*/
 	 
 	 public class FileMeta {
 		 

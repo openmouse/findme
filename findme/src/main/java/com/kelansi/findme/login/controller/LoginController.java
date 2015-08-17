@@ -11,9 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kelansi.findme.bean.Message;
-import com.kelansi.findme.domain.Admin;
+import com.kelansi.findme.common.Message;
+import com.kelansi.findme.domain.User;
 import com.kelansi.findme.login.service.LoginService;
+import com.kelansi.findme.rsa.service.RSAService;
 
 @Controller
 public class LoginController {
@@ -22,6 +23,9 @@ public class LoginController {
 	
 	@Autowired
 	private LoginService loginService;
+	
+	@Autowired
+	private RSAService rsaService;
 
 	@RequestMapping(value="/login")
 	public String login(){
@@ -31,9 +35,17 @@ public class LoginController {
 	@RequestMapping(value="/submit")
 	@ResponseBody
 	public Message submit(String username, HttpServletRequest request, HttpServletResponse response){
+		String password = rsaService.decryptParameter("enPassword", request);
+        rsaService.removePrivateKey(request);
+        
 		HttpSession session = request.getSession();
-		session.setAttribute(Admin.ADMIN_SESSION_ATTR, new Object());
-		logger.info("login success");
+		
+		User user = null;
+		if((user = loginService.auth(username, password)) == null){
+			return Message.error("login.auth.failure");
+		}
+		session.setAttribute(User.USER_SESSION_ATTR, user);
+		logger.info(user.getUsername() + "login success");
 		return Message.SUCCESS_MESSAGE;
 	}
 	

@@ -1,19 +1,13 @@
 package com.kelansi.findme.upload.service.impl;
 
-import java.text.DecimalFormat;
-
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
 import org.springframework.stereotype.Service;
 
-import com.kelansi.findme.exception.CommonException;
 import com.kelansi.findme.upload.service.UploadService;
-import com.kelansi.findme.utils.excel.ExcelReader;
 
 @Service
 public class UploadServiceImpl implements UploadService {
 
-	@Override
+	/*@Override
 	public void importByExcel(ExcelReader excel) {
 		Sheet sheet = excel.getSheet(0);
         int rowCount = sheet.getLastRowNum();
@@ -41,6 +35,6 @@ public class UploadServiceImpl implements UploadService {
             	 
              }
         }
-	}
+	}*/
 
 }

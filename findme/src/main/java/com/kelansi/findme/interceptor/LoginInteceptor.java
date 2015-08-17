@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.kelansi.findme.domain.Admin;
+import com.kelansi.findme.domain.User;
 
 public class LoginInteceptor extends HandlerInterceptorAdapter {
 
@@ -29,7 +29,7 @@ public class LoginInteceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
 		HttpSession session = request.getSession();
-		if(session.getAttribute(Admin.ADMIN_SESSION_ATTR) != null){
+		if(session.getAttribute(User.USER_SESSION_ATTR) != null){
 			return true;
 		}else{
 			return redirect(request, response);
