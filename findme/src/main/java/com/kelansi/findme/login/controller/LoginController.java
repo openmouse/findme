@@ -34,9 +34,7 @@ public class LoginController {
 	
 	@RequestMapping(value="/submit")
 	@ResponseBody
-	public Message submit(String username, HttpServletRequest request, HttpServletResponse response){
-		String password = rsaService.decryptParameter("enPassword", request);
-        rsaService.removePrivateKey(request);
+	public Message submit(String username, String password, HttpServletRequest request, HttpServletResponse response){
         
 		HttpSession session = request.getSession();
 		
