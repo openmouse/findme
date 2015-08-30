@@ -35,13 +35,14 @@ public class LoginController {
 	@RequestMapping(value="/submit")
 	@ResponseBody
 	public Message submit(String username, String password, HttpServletRequest request, HttpServletResponse response){
-        
-		HttpSession session = request.getSession();
 		
 		User user = null;
 		if((user = loginService.auth(username, password)) == null){
 			return Message.error("login.auth.failure");
 		}
+		
+		HttpSession session = request.getSession();
+		
 		session.setAttribute(User.USER_SESSION_ATTR, user);
 		logger.info(user.getUsername() + "login success");
 		return Message.SUCCESS_MESSAGE;
@@ -49,6 +50,6 @@ public class LoginController {
 	
 	@RequestMapping(value="/index")
 	public String index(){
-		return "index";
+		return "/index";
 	}
 }

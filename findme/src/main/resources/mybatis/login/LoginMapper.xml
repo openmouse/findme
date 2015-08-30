@@ -9,6 +9,6 @@
 		<result column="password" property="password" jdbcType="VARCHAR"/>
 	</resultMap>
 	<select id="getUserByNameAndPwd" resultMap="BaseResultMap" parameterType="map">
-		select * from findme_user where username = #{username,jdbcType=VARCHAR} AND password = #{password,jdbc=VARCHAR}
+		select * from findme_user where username = #{username,jdbcType=VARCHAR} AND password = #{password,jdbcType=VARCHAR}
 	</select>
 </mapper>

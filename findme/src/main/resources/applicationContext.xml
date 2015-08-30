@@ -53,11 +53,6 @@
 		<property name="defaultLocale" value="${locale}" />
 	</bean>
 
-	<!-- <bean class="com.hengtiansoft.xyl.exception.XylSimpleMappingExceptionResolver">
-		<property name="defaultErrorView" value="${common.error.page}" />
-	</bean>
-	
-	<bean class="com.hengtiansoft.xyl.utils.SpringUtils" lazy-init="false"/> -->
 	<bean class="com.kelansi.findme.utils.SpringUtils" lazy-init="false"/>
 
 	<import resource="classpath*:applicationContext-db.xml" />

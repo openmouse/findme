@@ -28,7 +28,11 @@
 			async: false,
 			cache: false,
 			success: function(message) {
-				
+				if(message.type = 'success'){
+					location.href = kelansi.base + "/index.htm";
+				}else{
+					location.href = kelansi.base + "/error.html";
+				}
 			}
 		});
 	});

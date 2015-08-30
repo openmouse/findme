@@ -1,5 +1,8 @@
 package com.kelansi.findme.login.service.impl;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +22,10 @@ public class LoginServiceImpl implements LoginService{
 		if(StringUtils.isBlank(username) || StringUtils.isBlank(password)){
 			return null;
 		}
-		return loginMapper.getUserByNameAndPwd(username, password);
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("username", username);
+		map.put("password", password);
+		return loginMapper.getUserByNameAndPwd(map);
 	}
 
 }
