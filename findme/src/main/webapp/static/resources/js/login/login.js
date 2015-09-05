@@ -21,7 +21,7 @@
 	$loginbtn.click(function(){
 		$('#loading').removeClass('hidden');
 		$.ajax({
-			url: $loginForm.attr("action"),
+			url: "submit.htm",
 			type: "POST",
 			data: {username: $username.val(), password: $password.val()},
 			dataType: "json",

@@ -2,7 +2,7 @@
  * 
  */
 
-var kelansi = {base:'/demo'};
+var kelansi = {base:'/findme'};
 (function($) {
 	//令牌	
 	$(document).ajaxSend(function(event, request, settings) {

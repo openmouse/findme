@@ -17,7 +17,7 @@
 					<span class="fa fa-quote-left "></span> 登录 <span class="fa fa-quote-right "></span>
 				</h2>
 	            <div>
-		            <form id="loginForm" action="submit.htm" method="post">
+		            <form id="loginForm" action="submit.htm" method="post" onsubmit="return false;">
 		                <input id="username" type="text" placeholder="登录账号"/>
 		                <input id="password" type="password" placeholder="输入密码" >
 		
