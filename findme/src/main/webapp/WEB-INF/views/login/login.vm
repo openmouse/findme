@@ -34,6 +34,7 @@
 	</div>
 	<script type="text/javascript" src="static/resources/lib/jquery/jquery-1.11.3.js"></script>
     <script type="text/javascript" src="static/resources/lib/bootstrap/bootstrap.min.js"></script>
+    <script type="text/javascript" src="static/resources/js/common.js"></script>
     <script type="text/javascript" src="static/resources/js/login/login.js"></script>
 </body>
  

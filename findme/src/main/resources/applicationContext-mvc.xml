@@ -27,14 +27,7 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
-			<mvc:exclude-mapping path="/payment/**" />
-			<bean id="tokenInterceptor" class="com.hengtiansoft.xinyunlian.interceptor.TokenInterceptor" />
-		</mvc:interceptor>
-		<mvc:interceptor>
-			<mvc:mapping path="/**" />
-			<bean id="openSessionInViewInterceptor" class="org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor">
-				<property name="entityManagerFactory" ref="entityManagerFactory" />
-			</bean>
+			<bean id="tokenInterceptor" class="com.kelansi.findme.interceptor.TokenInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
 	
