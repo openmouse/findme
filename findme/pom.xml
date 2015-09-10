@@ -200,6 +200,20 @@
 			<artifactId>bcprov-jdk15on</artifactId>
 			<version>1.47</version>
 		</dependency>
+		<dependency>
+			<groupId>IKAnalyzer</groupId>
+			<artifactId>IKAnalyzer</artifactId>
+			<version>3.2.8</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/IKAnalyzer-3.2.8.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-core</artifactId>
+			<version>3.6.0</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/lucene-core-3.6.0.jar</systemPath>
+		</dependency>
   </dependencies>
 	<build>  
 	  <plugins>  
