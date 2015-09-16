@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kelansi.findme.search.dao.SearchMapper" >
+	<resultMap type="com.kelansi.findme.domain.User" id="BaseResultMap">
+		<id column="id" property="id" jdbcType="BIGINT"/>
+		<result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+		<result column="modify_date" property="modifyDate" jdbcType="TIMESTAMP"/>
+		<result column="username" property="username" jdbcType="VARCHAR"/>
+		<result column="password" property="password" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<resultMap type="com.kelansi.findme.domain.FieldEnumBean" id="fieldEnum">
+		<result column="field" property="field" jdbcType="VARCHAR"/>
+		<result column="enumKey" property="enum_key" jdbcType="BIGINT"/>
+	</resultMap>
+	<select id="getStrByMappingField" resultMap="java.lang.String" parameterType="map">
+		select mapping_str from findme_word_mapping where field = #{field,jdbcType=VARCHAR}
+	</select>
+	<select id="getEnumValueByWords" resultMap="java.lang.Integer" parameterType="map">
+		select enum_value from findme_enum_entry where key = #{key,jdbcType=VARCHAR}
+	</select>
+</mapper>
