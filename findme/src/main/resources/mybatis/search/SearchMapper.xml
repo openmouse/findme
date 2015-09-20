@@ -9,14 +9,21 @@
 		<result column="password" property="password" jdbcType="VARCHAR"/>
 	</resultMap>
 	
-	<resultMap type="com.kelansi.findme.domain.FieldEnumBean" id="fieldEnum">
+	<resultMap type="com.kelansi.findme.domain.WordMappingBean" id="wordMapping">
 		<result column="field" property="field" jdbcType="VARCHAR"/>
-		<result column="enumKey" property="enum_key" jdbcType="BIGINT"/>
+		<result column="enum_num" property="enumNum" jdbcType="BIGINT"/>
+		<result column="mappingStr" property="mappingStr" jdbcType="VARCHAR"/>
 	</resultMap>
-	<select id="getStrByMappingField" resultMap="java.lang.String" parameterType="map">
-		select mapping_str from findme_word_mapping where field = #{field,jdbcType=VARCHAR}
+	
+	<resultMap type="com.kelansi.findme.domain.EnumEntryBean" id="enumEntry">
+		<result column="key" property="key" jdbcType="VARCHAR"/>
+		<result column="enum_value" property="enumValue" jdbcType="BIGINT"/>
+		<result column="enum_num" property="enumNum" jdbcType="BIGINT"/>
+	</resultMap>
+	<select id="getStrByMappingField" resultMap="wordMapping" parameterType="map">
+		select mapping_str,field,enum_num from findme_word_mapping where field = #{field,jdbcType=VARCHAR}
 	</select>
 	<select id="getEnumValueByWords" resultMap="java.lang.Integer" parameterType="map">
-		select enum_value from findme_enum_entry where key = #{key,jdbcType=VARCHAR}
+		select key,enum_value,enum_num from findme_enum_entry where key = #{key,jdbcType=VARCHAR}
 	</select>
 </mapper>

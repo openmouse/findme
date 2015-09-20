@@ -1,8 +1,12 @@
 package com.kelansi.findme.search.dao;
 
+import com.kelansi.findme.domain.EnumEntryBean;
+import com.kelansi.findme.domain.WordMappingBean;
+
+
 public interface SearchMapper {
 
-	String getStrByMappingField(String keyword);
+	WordMappingBean getStrByMappingField(String keyword);
 	
-	Integer getEnumValueByWords(String keyword);
+	EnumEntryBean getEnumValueByWords(String keyword);
 }

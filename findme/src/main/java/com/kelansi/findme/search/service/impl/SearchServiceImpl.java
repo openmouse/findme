@@ -3,8 +3,10 @@ package com.kelansi.findme.search.service.impl;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -13,7 +15,9 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kelansi.findme.domain.EnumEntryBean;
 import com.kelansi.findme.domain.RoomDetailInfo;
+import com.kelansi.findme.domain.WordMappingBean;
 import com.kelansi.findme.search.dao.SearchMapper;
 import com.kelansi.findme.search.service.SearchService;
 import com.kelansi.findme.word.mapping.WXWordsProcessor;
@@ -46,19 +50,34 @@ public class SearchServiceImpl implements SearchService{
 		StringBuilder sql = new StringBuilder();
 		Iterator<String> iterator =  keywords.iterator();
 		sql.append("select * from findme_room_info where 1=1");
-		while(iterator.hasNext()){
-			List<String> fields = this.getFieldsByKeyword(keywords, iterator);
-			List<Integer> enumValues = this.getEnumValuesByKeyword(keywords, iterator);
-		}
+		List<WordMappingBean> fields = this.getFieldsByKeyword(keywords, iterator);
+		Map<Integer, EnumEntryBean> enumValues = this.getEnumValuesByKeyword(keywords, iterator);
+		
+		this.buildSql(fields, enumValues, sql);
+		
 		return null;
 	}
 	
-	private List<String> getFieldsByKeyword(List<String> keywords, Iterator<String> iterator){
-		List<String> fields = new ArrayList<String>();
+	private String buildSql(List<WordMappingBean> fields, Map<Integer, EnumEntryBean> enumValues, StringBuilder sbd){
+		Integer size = fields.size();
+		for(int i = 0 ; i < size ; i ++){
+			WordMappingBean field = fields.get(i);
+			Integer enumKey = field.getEnumNum();
+			EnumEntryBean enumValue = enumValues.get(enumKey);
+			sbd.append(" and ");
+			sbd.append(field.getMappingStr());
+			sbd.append(" = ");
+			sbd.append(enumValue.getEnumValue());
+		}
+		return sbd.toString();
+	}
+	
+	private List<WordMappingBean> getFieldsByKeyword(List<String> keywords, Iterator<String> iterator){
+		List<WordMappingBean> fields = new ArrayList<WordMappingBean>();
 		for(String keyword : keywords){
 			if(StringUtils.isNotBlank(keyword)){
-				String fieldName = searchMapper.getStrByMappingField(keyword);
-				if(StringUtils.isNotBlank(fieldName)){
+				WordMappingBean fieldName = searchMapper.getStrByMappingField(keyword);
+				if(fieldName != null){
 					fields.add(fieldName);
 					iterator.remove();
 				}
@@ -67,14 +86,14 @@ public class SearchServiceImpl implements SearchService{
 		return fields;
 	}
 	
-	private List<Integer> getEnumValuesByKeyword(List<String> keywords, Iterator<String> iterator){
-		List<Integer> enumValues  = new ArrayList<Integer>();
+	private Map<Integer, EnumEntryBean> getEnumValuesByKeyword(List<String> keywords, Iterator<String> iterator){
+		Map<Integer, EnumEntryBean> enumValues  = new HashMap<Integer, EnumEntryBean>();
 		for(String keyword : keywords){
 			if(StringUtils.isNotBlank(keyword)){
-				Integer enumValue = searchMapper.getEnumValueByWords(keyword);
+				EnumEntryBean enumValue = searchMapper.getEnumValueByWords(keyword);
 				if(enumValue != null ){
 					iterator.remove();
-					enumValues.add(enumValue);
+					enumValues.put(enumValue.getEnumNum(), enumValue);
 				}
 			}
 		}
