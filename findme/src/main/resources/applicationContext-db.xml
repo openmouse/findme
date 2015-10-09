@@ -59,6 +59,10 @@
 	<bean name="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
+	
+	<bean name="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory" />
+	</bean> 
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
 	<!-- 配置druid监控spring jdbc -->

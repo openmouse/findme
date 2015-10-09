@@ -22,6 +22,9 @@ public class RoomDetailInfo implements Serializable{
 	
 	/** 图片地址 */
 	private String picturePaths;
+	
+	/** 微信服务器端保存的商品的上传ID */
+	private String mediaId;
 
 	public Long getDealerId() {
 		return dealerId;
@@ -61,5 +64,13 @@ public class RoomDetailInfo implements Serializable{
 
 	public void setPicturePaths(String picturePaths) {
 		this.picturePaths = picturePaths;
+	}
+
+	public String getMediaId() {
+		return mediaId;
+	}
+
+	public void setMediaId(String mediaId) {
+		this.mediaId = mediaId;
 	}
 }

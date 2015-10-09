@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,16 +47,19 @@ public class SearchServiceImpl implements SearchService{
 		}
 	}
 	
-	private List<RoomDetailInfo> serachRoomInfosByKeywords(List<String> keywords){
+	@Resource(name = "sqlSession")
+	private SqlSessionTemplate template;
+	
+	public List<RoomDetailInfo> serachRoomInfosByKeywords(List<String> keywords){
 		StringBuilder sql = new StringBuilder();
 		Iterator<String> iterator =  keywords.iterator();
 		sql.append("select * from findme_room_info where 1=1");
 		List<WordMappingBean> fields = this.getFieldsByKeyword(keywords, iterator);
 		Map<Integer, EnumEntryBean> enumValues = this.getEnumValuesByKeyword(keywords, iterator);
 		
-		this.buildSql(fields, enumValues, sql);
+		String finalSql = this.buildSql(fields, enumValues, sql);
 		
-		return null;
+		return template.<RoomDetailInfo>selectList(finalSql);
 	}
 	
 	private String buildSql(List<WordMappingBean> fields, Map<Integer, EnumEntryBean> enumValues, StringBuilder sbd){
