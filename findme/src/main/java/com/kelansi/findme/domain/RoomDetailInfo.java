@@ -1,14 +1,13 @@
 package com.kelansi.findme.domain;
 
-import java.io.Serializable;
 
-public class RoomDetailInfo implements Serializable{
+public class RoomDetailInfo extends BaseDomain{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -5608034604878640779L;
-
+	
 	private Long dealerId;
 	
 	/** 枚举形式 房型*/
@@ -24,7 +23,7 @@ public class RoomDetailInfo implements Serializable{
 	private String picturePaths;
 	
 	/** 微信服务器端保存的商品的上传ID */
-	private String mediaId;
+	private String mediaIds;
 
 	public Long getDealerId() {
 		return dealerId;
@@ -66,11 +65,11 @@ public class RoomDetailInfo implements Serializable{
 		this.picturePaths = picturePaths;
 	}
 
-	public String getMediaId() {
-		return mediaId;
+	public String getMediaIds() {
+		return mediaIds;
 	}
 
-	public void setMediaId(String mediaId) {
-		this.mediaId = mediaId;
+	public void setMediaIds(String mediaIds) {
+		this.mediaIds = mediaIds;
 	}
 }

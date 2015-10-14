@@ -40,8 +40,7 @@ public class SearchServiceImpl implements SearchService{
 			e.printStackTrace();
 		}
 		if(CollectionUtils.isNotEmpty(parsedWords)){
-			
-			return null;
+			return serachRoomInfosByKeywords(parsedWords);
 		}else{
 			return Collections.emptyList();
 		}
@@ -52,10 +51,16 @@ public class SearchServiceImpl implements SearchService{
 	
 	public List<RoomDetailInfo> serachRoomInfosByKeywords(List<String> keywords){
 		StringBuilder sql = new StringBuilder();
-		Iterator<String> iterator =  keywords.iterator();
 		sql.append("select * from findme_room_info where 1=1");
-		List<WordMappingBean> fields = this.getFieldsByKeyword(keywords, iterator);
-		Map<Integer, EnumEntryBean> enumValues = this.getEnumValuesByKeyword(keywords, iterator);
+		Iterator<String> iterator =  keywords.iterator();
+		List<WordMappingBean> fields = null;
+		Map<Integer, EnumEntryBean> enumValues = null;
+		while(iterator.hasNext()){
+			String keyword = iterator.next();
+			fields = this.getFieldsByKeyword(keyword, iterator);
+			enumValues = this.getEnumValuesByKeyword(keyword, iterator);
+		}
+		
 		
 		String finalSql = this.buildSql(fields, enumValues, sql);
 		
@@ -76,29 +81,25 @@ public class SearchServiceImpl implements SearchService{
 		return sbd.toString();
 	}
 	
-	private List<WordMappingBean> getFieldsByKeyword(List<String> keywords, Iterator<String> iterator){
+	private List<WordMappingBean> getFieldsByKeyword(String keyword, Iterator<String> iterator){
 		List<WordMappingBean> fields = new ArrayList<WordMappingBean>();
-		for(String keyword : keywords){
-			if(StringUtils.isNotBlank(keyword)){
-				WordMappingBean fieldName = searchMapper.getStrByMappingField(keyword);
-				if(fieldName != null){
-					fields.add(fieldName);
-					iterator.remove();
-				}
+		if(StringUtils.isNotBlank(keyword)){
+			WordMappingBean fieldName = searchMapper.getStrByMappingField(keyword);
+			if(fieldName != null){
+				fields.add(fieldName);
+				iterator.remove();
 			}
 		}
 		return fields;
 	}
 	
-	private Map<Integer, EnumEntryBean> getEnumValuesByKeyword(List<String> keywords, Iterator<String> iterator){
+	private Map<Integer, EnumEntryBean> getEnumValuesByKeyword(String keyword, Iterator<String> iterator){
 		Map<Integer, EnumEntryBean> enumValues  = new HashMap<Integer, EnumEntryBean>();
-		for(String keyword : keywords){
-			if(StringUtils.isNotBlank(keyword)){
-				EnumEntryBean enumValue = searchMapper.getEnumValueByWords(keyword);
-				if(enumValue != null ){
-					iterator.remove();
-					enumValues.put(enumValue.getEnumNum(), enumValue);
-				}
+		if(StringUtils.isNotBlank(keyword)){
+			EnumEntryBean enumValue = searchMapper.getEnumValueByWords(keyword);
+			if(enumValue != null ){
+				iterator.remove();
+				enumValues.put(enumValue.getEnumNum(), enumValue);
 			}
 		}
 		return enumValues;

@@ -20,10 +20,10 @@
 		<result column="enum_value" property="enumValue" jdbcType="BIGINT"/>
 		<result column="enum_num" property="enumNum" jdbcType="BIGINT"/>
 	</resultMap>
-	<select id="getStrByMappingField" resultMap="wordMapping" parameterType="map">
+	<select id="getStrByMappingField" resultMap="wordMapping" parameterType="java.lang.String">
 		select mapping_str,field,enum_num from findme_word_mapping where field = #{field,jdbcType=VARCHAR}
 	</select>
-	<select id="getEnumValueByWords" resultMap="java.lang.Integer" parameterType="map">
-		select key,enum_value,enum_num from findme_enum_entry where key = #{key,jdbcType=VARCHAR}
+	<select id="getEnumValueByWords" resultMap="enumEntry" parameterType="java.lang.String">
+		select enum_key,enum_value,enum_num from findme_enum_entry where enum_key = #{key,jdbcType=VARCHAR}
 	</select>
 </mapper>

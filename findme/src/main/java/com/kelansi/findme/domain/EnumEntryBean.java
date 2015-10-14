@@ -2,18 +2,18 @@ package com.kelansi.findme.domain;
 
 public class EnumEntryBean {
 
-	private String key;
+	private String enum_key;
 	
 	private Integer enumValue;
 	
 	private Integer enumNum;
 
-	public String getKey() {
-		return key;
+	public String getEnum_key() {
+		return enum_key;
 	}
 
-	public void setKey(String key) {
-		this.key = key;
+	public void setEnum_key(String enum_key) {
+		this.enum_key = enum_key;
 	}
 
 	public Integer getEnumValue() {

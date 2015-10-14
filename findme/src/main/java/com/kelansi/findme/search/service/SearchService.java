@@ -14,4 +14,6 @@ public interface SearchService {
 	 */
 	List<RoomDetailInfo> serachRoomInfosByKeywords(List<String> keywords);
 	
+	List<RoomDetailInfo> searchRoomInfos(String words);
+	
 }

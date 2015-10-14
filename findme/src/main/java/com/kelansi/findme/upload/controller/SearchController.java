@@ -45,8 +45,8 @@ public class SearchController {
 			List<String> words = processor.parse(keywords);
 			List<RoomDetailInfo> infos = searchService.serachRoomInfosByKeywords(words);
 			for(RoomDetailInfo info : infos){
-				if(StringUtils.isNotBlank(info.getMediaId())){
-					mediaIds.add(info.getMediaId());
+				if(StringUtils.isNotBlank(info.getMediaIds())){
+					mediaIds.add(info.getMediaIds());
 				}
 			}
 		} catch (IOException e) {
