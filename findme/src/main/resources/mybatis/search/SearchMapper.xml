@@ -12,7 +12,7 @@
 	<resultMap type="com.kelansi.findme.domain.WordMappingBean" id="wordMapping">
 		<result column="field" property="field" jdbcType="VARCHAR"/>
 		<result column="enum_num" property="enumNum" jdbcType="BIGINT"/>
-		<result column="mappingStr" property="mappingStr" jdbcType="VARCHAR"/>
+		<result column="mapping_str" property="mappingStr" jdbcType="VARCHAR"/>
 	</resultMap>
 	
 	<resultMap type="com.kelansi.findme.domain.EnumEntryBean" id="enumEntry">
@@ -20,10 +20,26 @@
 		<result column="enum_value" property="enumValue" jdbcType="BIGINT"/>
 		<result column="enum_num" property="enumNum" jdbcType="BIGINT"/>
 	</resultMap>
+	
+	<resultMap type="com.kelansi.findme.domain.RoomDetailInfo" id="roomDetail">
+		<result column="id" property="id" jdbcType="BIGINT"/>
+		<result column="create_date" property="createDate" jdbcType="DATE"/>
+		<result column="modify_date" property="modifyDate" jdbcType="DATE"/>
+		<result column="dealer_id" property="dealerId" jdbcType="BIGINT"/>
+		<result column="room_model" property="roomModel" jdbcType="INTEGER"/>
+		<result column="size" property="size" jdbcType="INTEGER"/>
+		<result column="style" property="style" jdbcType="INTEGER"/>
+		<result column="picture_paths" property="picturePaths" jdbcType="VARCHAR"/>
+		<result column="media_ids" property="mediaIds" jdbcType="VARCHAR"/>
+	</resultMap>
+	
 	<select id="getStrByMappingField" resultMap="wordMapping" parameterType="java.lang.String">
 		select mapping_str,field,enum_num from findme_word_mapping where field = #{field,jdbcType=VARCHAR}
 	</select>
 	<select id="getEnumValueByWords" resultMap="enumEntry" parameterType="java.lang.String">
 		select enum_key,enum_value,enum_num from findme_enum_entry where enum_key = #{key,jdbcType=VARCHAR}
+	</select>
+	<select id="searchWithSql" resultMap="roomDetail">
+		${sql}
 	</select>
 </mapper>

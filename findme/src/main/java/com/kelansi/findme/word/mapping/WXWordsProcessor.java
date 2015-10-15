@@ -8,10 +8,12 @@ import java.util.List;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.wltea.analyzer.lucene.IKAnalyzer;
 
 @Component("wxWordsProcessor")
+@Scope("prototype")
 public class WXWordsProcessor {
 	
 	public List<String> parse(String words) throws IOException{

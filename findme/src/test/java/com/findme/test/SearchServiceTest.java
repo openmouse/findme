@@ -17,7 +17,7 @@ public class SearchServiceTest {
 	
 	@Test
 	public void test1(){
-		searchService.searchRoomInfos("温馨舒服");
+		searchService.searchRoomInfos("风格温馨,样子温暖");
 	}
 	
 }

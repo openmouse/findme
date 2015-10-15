@@ -51,20 +51,17 @@ public class SearchServiceImpl implements SearchService{
 	
 	public List<RoomDetailInfo> serachRoomInfosByKeywords(List<String> keywords){
 		StringBuilder sql = new StringBuilder();
-		sql.append("select * from findme_room_info where 1=1");
+		sql.append("select * from findme_room_detail where 1=1");
 		Iterator<String> iterator =  keywords.iterator();
-		List<WordMappingBean> fields = null;
-		Map<Integer, EnumEntryBean> enumValues = null;
+		List<WordMappingBean> fields = new ArrayList<WordMappingBean>();
+		Map<Integer, EnumEntryBean> enumValues = new HashMap<Integer, EnumEntryBean>();
 		while(iterator.hasNext()){
 			String keyword = iterator.next();
-			fields = this.getFieldsByKeyword(keyword, iterator);
-			enumValues = this.getEnumValuesByKeyword(keyword, iterator);
+			fields.addAll(this.getFieldsByKeyword(keyword, iterator));
+			enumValues.putAll(this.getEnumValuesByKeyword(keyword, iterator));
 		}
-		
-		
 		String finalSql = this.buildSql(fields, enumValues, sql);
-		
-		return template.<RoomDetailInfo>selectList(finalSql);
+		return searchMapper.searchWithSql(finalSql);
 	}
 	
 	private String buildSql(List<WordMappingBean> fields, Map<Integer, EnumEntryBean> enumValues, StringBuilder sbd){
