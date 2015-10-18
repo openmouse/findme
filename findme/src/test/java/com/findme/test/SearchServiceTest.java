@@ -15,9 +15,19 @@ public class SearchServiceTest {
 	@Autowired
 	private SearchService searchService;
 	
-	@Test
-	public void test1(){
-		searchService.searchRoomInfos("风格温馨,样子温暖");
-	}
+	/**
+	 * 测试word和enum都存在对应
+	 */
+//	@Test
+//	public void test1(){
+//		searchService.searchRoomInfos("风格温馨,样子温暖");
+//	}
 	
+	/**
+	 * 测试只有enum都存在
+	 */
+	@Test
+	public void test2(){
+		searchService.searchRoomInfos("房子要温馨,温暖");
+	}
 }

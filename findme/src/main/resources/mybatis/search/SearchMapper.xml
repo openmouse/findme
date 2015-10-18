@@ -42,4 +42,7 @@
 	<select id="searchWithSql" resultMap="roomDetail">
 		${sql}
 	</select>
+	<select id="findAllWordMappings" resultMap="wordMapping">
+		select * from findme_word_mapping
+	</select>
 </mapper>

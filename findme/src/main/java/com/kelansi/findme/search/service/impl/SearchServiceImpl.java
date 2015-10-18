@@ -7,15 +7,16 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kelansi.findme.common.Setting;
 import com.kelansi.findme.domain.EnumEntryBean;
 import com.kelansi.findme.domain.RoomDetailInfo;
 import com.kelansi.findme.domain.WordMappingBean;
@@ -28,6 +29,9 @@ public class SearchServiceImpl implements SearchService{
 	
 	@Resource(name = "wxWordsProcessor")
 	private WXWordsProcessor processor;
+	
+	@Autowired
+	private Setting setting;
 	
 	@Autowired
 	private SearchMapper searchMapper;
@@ -46,9 +50,6 @@ public class SearchServiceImpl implements SearchService{
 		}
 	}
 	
-	@Resource(name = "sqlSession")
-	private SqlSessionTemplate template;
-	
 	public List<RoomDetailInfo> serachRoomInfosByKeywords(List<String> keywords){
 		StringBuilder sql = new StringBuilder();
 		sql.append("select * from findme_room_detail where 1=1");
@@ -65,17 +66,40 @@ public class SearchServiceImpl implements SearchService{
 	}
 	
 	private String buildSql(List<WordMappingBean> fields, Map<Integer, EnumEntryBean> enumValues, StringBuilder sbd){
+		List<String> mappingEnums = new ArrayList<String>();
 		Integer size = fields.size();
 		for(int i = 0 ; i < size ; i ++){
 			WordMappingBean field = fields.get(i);
 			Integer enumKey = field.getEnumNum();
 			EnumEntryBean enumValue = enumValues.get(enumKey);
+			//若在关键句分词中未发现当前字段的形容词则直接continue
+			if(enumValue == null){
+				continue;
+			}
+			String conditionSql = this.buildConditionSql(field, enumValue);
+			if(!mappingEnums.contains(conditionSql)){
+				mappingEnums.add(conditionSql);
+			}
+		}
+		for(Entry<Integer, EnumEntryBean> entry : enumValues.entrySet()){
+			String conditionSql = this.buildConditionSql(setting.getWordMappings().get(entry.getKey()), entry.getValue());
+			if(!mappingEnums.contains(conditionSql)){
+				mappingEnums.add(conditionSql);
+			}
+		}
+		for(String mmappingEnum : mappingEnums){
 			sbd.append(" and ");
-			sbd.append(field.getMappingStr());
-			sbd.append(" = ");
-			sbd.append(enumValue.getEnumValue());
+			sbd.append(mmappingEnum);
 		}
 		return sbd.toString();
+	}
+	
+	private String buildConditionSql(WordMappingBean field,EnumEntryBean enumValue){
+		StringBuilder newStr = new StringBuilder();
+		newStr.append(field.getMappingStr());
+		newStr.append(" = ");
+		newStr.append(enumValue.getEnumValue());
+		return newStr.toString();
 	}
 	
 	private List<WordMappingBean> getFieldsByKeyword(String keyword, Iterator<String> iterator){

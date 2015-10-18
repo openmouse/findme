@@ -16,4 +16,6 @@ public interface SearchMapper {
 	EnumEntryBean getEnumValueByWords(String keyword);
 
 	List<RoomDetailInfo> searchWithSql(@Param("sql")String sql);
+
+	List<WordMappingBean> findAllWordMappings();
 }
