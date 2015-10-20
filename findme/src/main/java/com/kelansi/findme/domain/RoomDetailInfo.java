@@ -8,13 +8,18 @@ public class RoomDetailInfo extends BaseDomain{
 	 */
 	private static final long serialVersionUID = -5608034604878640779L;
 	
-	private Long dealerId;
+	private Integer dealer;
 	
 	/** 枚举形式 房型*/
 	private Integer roomModel;
 	
 	/** 枚举形式 面积 */
 	private Integer size;
+	/** 枚举范围 层高 */
+	private Integer floorHeight;
+	
+	/** 功能空间 */
+	private Integer functionSpace;
 	
 	/** 枚举形式 风格 */
 	private Integer style;
@@ -25,12 +30,12 @@ public class RoomDetailInfo extends BaseDomain{
 	/** 微信服务器端保存的商品的上传ID */
 	private String mediaIds;
 
-	public Long getDealerId() {
-		return dealerId;
+	public Integer getFloorHeight() {
+		return floorHeight;
 	}
 
-	public void setDealerId(Long dealerId) {
-		this.dealerId = dealerId;
+	public void setFloorHeight(Integer floorHeight) {
+		this.floorHeight = floorHeight;
 	}
 
 	public Integer getRoomModel() {
@@ -71,5 +76,21 @@ public class RoomDetailInfo extends BaseDomain{
 
 	public void setMediaIds(String mediaIds) {
 		this.mediaIds = mediaIds;
+	}
+
+	public Integer getFunctionSpace() {
+		return functionSpace;
+	}
+
+	public void setFunctionSpace(Integer functionSpace) {
+		this.functionSpace = functionSpace;
+	}
+
+	public Integer getDealer() {
+		return dealer;
+	}
+
+	public void setDealer(Integer dealer) {
+		this.dealer = dealer;
 	}
 }
