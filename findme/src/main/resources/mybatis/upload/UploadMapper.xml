@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kelansi.findme.upload.dao.UploadMapper" >
+	
+	<resultMap type="com.kelansi.findme.domain.WordMappingBean" id="wordMapping">
+		<result column="field" property="field" jdbcType="VARCHAR"/>
+		<result column="enum_num" property="enumNum" jdbcType="INTEGER"/>
+		<result column="mapping_str" property="mappingStr" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<resultMap type="com.kelansi.findme.domain.EnumEntryBean" id="enumEntry">
+		<result column="enum_key" property="enumKey" jdbcType="VARCHAR"/>
+		<result column="enum_value" property="enumValue" jdbcType="INTEGER"/>
+		<result column="enum_num" property="enumNum" jdbcType="INTEGER"/>
+		<result column="type" property="type" jdbcType="INTEGER"/>
+		<result column="num_begin" property="numBegin" jdbcType="DECIMAL"/>
+		<result column="num_end" property="numEnd" jdbcType="DECIMAL"/>
+	</resultMap>
+	
+	<resultMap type="com.kelansi.findme.domain.RoomDetailInfo" id="roomDetail">
+		<result column="id" property="id" jdbcType="BIGINT"/>
+		<result column="create_date" property="createDate" jdbcType="DATE"/>
+		<result column="modify_date" property="modifyDate" jdbcType="DATE"/>
+		<result column="dealer_id" property="dealerId" jdbcType="INTEGER"/>
+		<result column="room_model" property="roomModel" jdbcType="INTEGER"/>
+		<result column="size" property="size" jdbcType="INTEGER"/>
+		<result column="floor_height" property="floorHeight" jdbcType="INTEGER"/>
+		<result column="style" property="style" jdbcType="INTEGER"/>
+		<result column="picture_paths" property="picturePaths" jdbcType="VARCHAR"/>
+		<result column="media_ids" property="mediaIds" jdbcType="VARCHAR"/>
+		<result column="function_space" property="functionSpace" jdbcType="INTEGER"/>
+	</resultMap>
+	
+	<select id="getEnumValueByField" resultMap="enumEntry" parameterType="java.lang.String">
+		select ee.* from findme_enum_entry ee left join findme_word_mapping wm on ee.enum_num = wm.enum_num where wm.field = #{field}
+	</select>
+	
+	<insert id="insertEnumEntry" parameterType="map">
+		insert into findme_enum_entry (enum_key, enum_value, enum_num,type) values (#{enumKey,jdbcType=VARCHAR}, #{enumValue,jdbcType=INTEGER}, #{enumNum,jdbcType=INTEGER}, #{type, jdbcType=INTEGER})
+	</insert>
+	
+	<select id="getMaxEnumValueByEnumNum" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+		select max(enum_value) from findme_enum_entry where enum_num = #{enumNum,jdbcType=INTEGER}
+	</select>
+	
+	<insert id="insertRoomDetail" parameterType="list">
+		insert into findme_room_detail (dealer, room_model,
+		size,style,picture_paths,media_ids,create_date,modify_date,
+		floor_height,function_space) values 
+		<foreach collection="list" item="item" index="index" separator=",">
+			(#{item.dealer,jdbcType=INTEGER},
+			#{item.roomModel,jdbcType=INTEGER}, #{item.size,jdbcType=INTEGER}, #{item.style,jdbcType=INTEGER},
+			#{item.picturePaths,jdbcType=INTEGER}, #{item.mediaIds,jdbcType=INTEGER},
+			now(),now(),#{item.floorHeight,jdbcType=INTEGER},#{item.functionSpace,jdbcType=INTEGER})
+		</foreach>
+	</insert>
+	
+	<insert id="insertRoomDetailShow" parameterType="list">
+		insert into findme_room_detail_show (dealer, room_model,
+		size,style,picture_paths,create_date,modify_date,
+		floor_height,function_space) values 
+		<foreach collection="list" item="item" index="index" separator=",">
+			(#{item.dealer,jdbcType=VARCHAR},
+			#{item.roomModel,jdbcType=VARCHAR}, #{item.size,jdbcType=DECIMAL}, #{item.style,jdbcType=VARCHAR},
+			#{item.picturePaths,jdbcType=VARCHAR},
+			now(),now(),#{item.floorHeight,jdbcType=INTEGER},#{item.functionSpace,jdbcType=VARCHAR})
+		</foreach>
+	</insert>
+</mapper>
