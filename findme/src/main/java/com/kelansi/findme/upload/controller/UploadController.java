@@ -1,10 +1,23 @@
 package com.kelansi.findme.upload.controller;
 
+import java.io.IOException;
+import java.util.Iterator;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.kelansi.findme.common.Message;
+import com.kelansi.findme.common.ResultData;
+import com.kelansi.findme.excel.ExcelReader;
+import com.kelansi.findme.excel.ExcelReaderFactory;
+import com.kelansi.findme.exception.CommonException;
 import com.kelansi.findme.upload.service.UploadService;
 
 @Controller
@@ -13,11 +26,7 @@ public class UploadController {
 	
 	@Autowired
 	private UploadService uploadService;
-
-	@RequestMapping(value="/index")
-	public String list(){
-		return "upload";
-	}
+	
 	 /*@RequestMapping(value="/upload", method = RequestMethod.POST)
 	    public @ResponseBody LinkedList<FileMeta> upload(MultipartHttpServletRequest request, HttpServletResponse response) {
 		 LinkedList<FileMeta> files = new LinkedList<FileMeta>();
@@ -60,28 +69,36 @@ public class UploadController {
 	        // [{"fileName":"app_engine-85x77.png","fileSize":"8 Kb","fileType":"image/png"},...]
 	        return files;
 	    }*/
-	@RequestMapping(value="/upload", method = RequestMethod.POST)
-    /*public @ResponseBody ResultData upload(MultipartHttpServletRequest mulRequest, HttpServletResponse response) {
+	@RequestMapping(method = RequestMethod.GET)
+	public String uploadView(){
+		return "upload";
+	}
+	
+	@RequestMapping(value="/doUpload", method = RequestMethod.POST)
+    public @ResponseBody ResultData upload(MultipartHttpServletRequest mulRequest, HttpServletResponse response) {
 		 Iterator<String> itr =  mulRequest.getFileNames();
          MultipartFile file = null;
          ResultData result=new ResultData();
          //2. get each file
-         while(itr.hasNext()){
- 
-             //2.1 get next MultipartFile
-        	 file = mulRequest.getFile(itr.next()); 
-             try {
-            	 ExcelReader excel = ExcelReaderFactory.getExcelReader(file.getOriginalFilename(), file.getInputStream());
-            	 uploadService.importByExcel(excel);
-            	 excel.close();
-            	 result.setMessage(Message.SUCCESS_MESSAGE);
-             } catch (IOException|CommonException e) {
-            	 result.setMessage(Message.ERROR_MESSAGE);
-            	 
-             } 
-         }
+		while (itr.hasNext()) {
+			// 2.1 get next MultipartFile
+			file = mulRequest.getFile(itr.next());
+			try {
+				ExcelReader excel = ExcelReaderFactory.getExcelReader(
+						file.getOriginalFilename(), file.getInputStream());
+				uploadService.importByExcel(excel);
+				excel.close();
+				result.setMessage(Message.SUCCESS_MESSAGE);
+			} catch (IOException | CommonException e) {
+				result.setMessage(Message.ERROR_MESSAGE);
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			}
+		}
          return result;
-	}*/
+	}
 	 
 	 public class FileMeta {
 		 

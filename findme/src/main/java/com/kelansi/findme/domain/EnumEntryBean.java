@@ -4,18 +4,20 @@ import java.math.BigDecimal;
 
 public class EnumEntryBean {
 
-	private String enumKey;
+	public String enumKey;
 	
-	private Integer enumValue;
+	public Integer enumValue;
 	
-	private Integer enumNum;
+	public Integer enumNum;
 	
-	private Integer type;
+	public Integer type;
 	
-	private BigDecimal numBegin;
+	public BigDecimal numBegin;
 	
-	private BigDecimal numEnd;
+	public BigDecimal numEnd;
 
+	public EnumEntryBean(){}
+	
 	public EnumEntryBean(String enumKey, Integer enumValue, Integer enumNum,
 			Integer type, BigDecimal numBegin, BigDecimal numEnd) {
 		super();

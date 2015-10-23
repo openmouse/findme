@@ -1,11 +1,11 @@
 package com.kelansi.findme.domain;
 
 public class WordMappingBean {
-	private String field;
+	public String field;
 	
-	private String mappingStr;
+	public String mappingStr;
 	
-	private Integer enumNum;
+	public Integer enumNum;
 
 	public String getField() {
 		return field;

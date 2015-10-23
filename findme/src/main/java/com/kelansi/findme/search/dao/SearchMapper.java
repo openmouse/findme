@@ -18,4 +18,6 @@ public interface SearchMapper {
 	List<RoomDetailInfo> searchWithSql(@Param("sql")String sql);
 
 	List<WordMappingBean> findAllWordMappings();
+
+	List<EnumEntryBean> findAllEnumEntries();
 }
