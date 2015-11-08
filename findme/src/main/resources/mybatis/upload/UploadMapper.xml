@@ -66,4 +66,9 @@
 			now(),now(),#{item.floorHeight,jdbcType=INTEGER},#{item.functionSpace,jdbcType=VARCHAR})
 		</foreach>
 	</insert>
+	
+	<select id="findSameRoomDetail" resultType="boolean" parameterType="map">
+		select if(count(id) > 1, true, false) from findme_room_detail where dealer = #{dealer} and room_model = #{roomModel} and size = #{size} and style = {#style} and picture_paths = #{picturePaths} and floor_height = #{floorHeight} and fucntion_space = #{functionSpace}
+	</select>
+	
 </mapper>

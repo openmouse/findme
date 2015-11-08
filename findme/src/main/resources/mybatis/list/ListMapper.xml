@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kelansi.findme.list.dao.ListMapper" >
+	
+	<resultMap type="com.kelansi.findme.domain.RoomDetailInfoShow" id="roomDetailShow">
+		<result column="id" property="id" jdbcType="BIGINT"/>
+		<result column="create_date" property="createDate" jdbcType="DATE"/>
+		<result column="modify_date" property="modifyDate" jdbcType="DATE"/>
+		<result column="dealer" property="dealer" jdbcType="VARCHAR"/>
+		<result column="room_model" property="roomModel" jdbcType="VARCHAR"/>
+		<result column="size" property="size" jdbcType="DECIMAL"/>
+		<result column="floor_height" property="floorHeight" jdbcType="INTEGER"/>
+		<result column="style" property="style" jdbcType="VARCHAR"/>
+		<result column="picture_paths" property="picturePaths" jdbcType="VARCHAR"/>
+		<result column="function_space" property="functionSpace" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<select id="getRoomDetailInfos" resultMap="roomDetailShow" parameterType="map">
+		select * from findme_room_detail_show limit #{start, jdbcType=INTEGER},  #{inval, jdbcType=INTEGER}
+	</select>
+	
+	<select id="count" resultType="INT">
+		select count(*) from findme_room_detail_show
+	</select>
+</mapper>

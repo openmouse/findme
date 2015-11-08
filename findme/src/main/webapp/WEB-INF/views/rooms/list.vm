@@ -1,0 +1,78 @@
+<html lang="en"><head>
+<title>Kelansi Admin</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="#static()/css/common.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<form id="listForm" action="roomList.htm" method="get">
+		<table id="listTable" class="list">
+			<tr>
+				<th>
+					<a href="javascript:;">经销商</a>
+				</th>
+				<th>
+					<a href="javascript:;">房型</a>
+				</th>
+				<th>
+					<a href="javascript:;">层高(米)</a>
+				</th>
+				<th>
+					<a href="javascript:;">功能空间</a>
+				</th>
+				<th>
+					<a href="javascript:;">面积(平方米)</a>
+				</th>
+				<th>
+					<a href="javascript:;">风格</a>
+				</th>
+				<th>
+					<a href="javascript:;">全景图</a>
+				</th>
+			</tr>
+			#foreach ($detail in $page.content)
+				<tr>
+					<td>
+						$detail.dealer
+					</td>
+					<td>
+						$detail.roomModel
+					</td>
+					<td>
+						$detail.floorHeight
+					</td>
+					<td>
+						$detail.functionSpace
+					</td>
+					<td>
+						$detail.size
+					</td>
+					<td>
+						$detail.style
+					</td>
+					<td>
+						#if($detail.pictPathList)
+							#set( $index = 1)
+							#foreach($pict in $detail.pictPathList)
+								<a href="$pict">图$index</a> 
+								#set( $index = $index + 1)
+							#end
+						#end
+					</td>
+				</tr>
+			#end
+		</table> 
+		#if($page.total != 0 && $page.total != 1)
+			<input type="hidden" id="total" value="$page.total" />
+			<input type="hidden" id="pageSize" name="pageSize" value="$page.pageSize" />
+			#set( $pageNumber = $page.pageNumber)
+			<input type="hidden" id="pageNumber" name="pageNumber" value="$pageNumber" />
+			<div class="pagination">
+				<a class="previousPage" href="javascript:;" onclick="javascript: $.pageSkip($pageNumber - 1);">&nbsp;</a>
+				<a class="nextPage" href="javascript:;" onclick="javascript: $.pageSkip($pageNumber + 1);">&nbsp;</a>
+			</div>
+		#end
+</body>
+<script src="#static()/lib/jquery/jquery-1.11.3.js"></script>
+<script src="#static()/js/list/list.js"></script>
+</html>

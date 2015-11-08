@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="static/resources/css/bootstrap/bootstrap-responsive.min.css">
 <link rel="stylesheet" href="static/resources/css/main/matrix-style.css">
 <link rel="stylesheet" href="static/resources/css/main/matrix-media.css">
+<link rel="stylesheet" href="static/resources/css/main/main.css">
 <link href="static/resources/css/font-awesome.css" rel="stylesheet">
 </head>
 <body>
@@ -30,15 +31,17 @@
 <!--sidebar-menu-->
 <div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-home"></i> Dashboard</a>
   <ul style="display: block;">
-    <li class="active"><a href="/findme/upload.htm" target="iframe"><span>Upload</span></a> </li>
-    <li><a href="index.html"><span>Config</span></a> </li>
+    <li class="active menu"><a href="/findme/upload.htm" target="iframe"><span>Upload</span></a> </li>
+    <li class="menu"><a href="/findme/upload/images.htm" target="iframe"><span>Upload Images</span></a> </li>
+    <li class="menu"><a href="/findme/roomList.htm" target="iframe"><span>Rooms Detail</span></a> </li>
+    <li class="menu"><a href="index.html"><span>Config</span></a> </li>
   </ul>
 </div>
 <div id="content">
 <!--breadcrumbs-->
   <div id="content-header">
     <div id="breadcrumb"> <a href="index.html" class="tip-bottom" data-original-title="Go to Home"><i class="icon-home"></i> Home</a></div>
-    <iframe name = "iframe" id="iframepage" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" onLoad="iFrameHeight()"></iframe>
+    <iframe name = "iframe" id="iframepage" frameborder="0" width="100%" height="100%"></iframe>
   </div>
 <!--End-breadcrumbs-->
 
@@ -61,13 +64,10 @@
 <script src="static/resources/js/main/matrix.js"></script> 
 <script src="static/resources/js/main/matrix.dashboard.js"></script> 
 <script type="text/javascript" language="javascript">   
-function iFrameHeight() {   
-var ifm= document.getElementById("iframepage");   
-var subWeb = document.frames ? document.frames["iframepage"].document : ifm.contentDocument;   
-if(ifm != null && subWeb != null) {
-   ifm.height = subWeb.body.scrollHeight;
-   ifm.width = subWeb.body.scrollWidth;
-}   
-}   
+$(".menu").click(function(){
+	$(".menu").removeClass("active");
+	$(this).addClass("active");
+});  
+
 </script>
 </body></html>

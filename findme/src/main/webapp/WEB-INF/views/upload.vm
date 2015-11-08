@@ -3,32 +3,33 @@
 <head><meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"><meta name="renderer" content="webkit" />
 <link rel="icon" href="#base()/favicon.ico" type="image/x-icon" />
 <link rel="shortcut icon" href="#base()/favicon.ico" type="image/x-icon" />
+<link href="#static()/css/common.css" rel="stylesheet" type="text/css" />
 <link href="#static()/css/upload.css" rel="stylesheet" type="text/css" />
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title>上传excel</title>
 <meta name="author" content="kelansi Team" />
 <meta name="copyright" content="kelansi" />
-
 </head>
 <body>
-	<div style="width:500px;padding:20px">
- 
-    <input id="fileupload" type="file" name="files[]" data-url="upload.htm" multiple>
- 
-    <div id="dropzone">Drop files here</div>
- 
-    <div id="progress">
-        <div style="width: 0%;"></div>
-    </div>
- 
-    <table id="uploaded-files">
-        <tr>
-            <th>File Name</th>
-            <th>File Size</th>
-            <th>File Type</th>
-            <th>Download</th>
-        </tr>
-    </table>
+	<form id="inputForm" action="upload/doUpload.jhtml" method="POST" enctype="multipart/form-data">
+		<table class="input tabContent firstTable">
+			<tr>
+				<th>
+					选择文件:
+				</th>
+				<td>
+					<input type="file" name="excel" class="file_upload" />
+				</td>
+			</tr>
+			<tr>
+				<th>
+				</th>
+				<td>
+					<input type="submit" class="button" value="确定" />
+				</td>
+			</tr>
+		</table>
+	</form>
  
 </div>
 </body>

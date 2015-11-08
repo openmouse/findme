@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"><meta name="renderer" content="webkit" />
+<link rel="icon" href="#base()/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="#base()/favicon.ico" type="image/x-icon" />
+<link href="#static()/css/common.css" rel="stylesheet" type="text/css" />
+<link href="#static()/css/upload/uploadify.css" rel="stylesheet" type="text/css" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>上传excel</title>
+<meta name="author" content="kelansi Team" />
+<meta name="copyright" content="kelansi" />
+</head>
+<body>
+	<table class="input tabContent firstTable">
+		<tr>
+			<th>
+			</th>
+			<td>
+				<span class="requiredField">*</span>请使用IE或者谷歌以便达到最佳效果
+			</td>
+		</tr>
+		<tr>
+			<th>
+				上传文件:
+			</th>
+			<td>
+				<input type="file" name="file_upload" id="file_upload" />
+			</td>
+		</tr>
+		<tr>
+			<th>
+			</th>
+			<td>
+				<input type="button" id="upload" class="button" value="开始上传" />
+			</td>
+		</tr>
+	</table>
+</div>
+</body>
+<script src="#static()/lib/jquery/jquery-1.11.3.js"></script>
+<script src="#static()/lib/fileupload/js/jquery.iframe-transport.js" ></script>
+<script src="#static()/lib/fileupload/js/vendor/jquery.ui.widget.js" ></script>
+<script src="#static()/lib/fileupload/js/jquery.fileupload.js"></script>
+<script src="#static()/lib/jquery/jquery.uploadify.js"></script>
+<script src="#static()/lib/js/imageUpload/images.js"></script>
+</html>

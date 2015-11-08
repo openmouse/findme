@@ -74,6 +74,11 @@ public class UploadController {
 		return "upload";
 	}
 	
+	@RequestMapping(value = "images", method = RequestMethod.GET)
+	public String uploadImagesView(){
+		return "imageUpload";
+	}
+	
 	@RequestMapping(value="/doUpload", method = RequestMethod.POST)
     public @ResponseBody ResultData upload(MultipartHttpServletRequest mulRequest, HttpServletResponse response) {
 		 Iterator<String> itr =  mulRequest.getFileNames();

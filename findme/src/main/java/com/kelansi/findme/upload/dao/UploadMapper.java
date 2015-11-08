@@ -26,4 +26,6 @@ public interface UploadMapper {
 	void insertRoomDetail(List<RoomDetailInfo> list);
 	
 	void insertRoomDetailShow(List<RoomDetailInfoShow> list);
+
+	Boolean findSameRoomDetail(Map<String,Object> map);
 }

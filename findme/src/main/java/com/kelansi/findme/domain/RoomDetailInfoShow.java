@@ -1,6 +1,10 @@
 package com.kelansi.findme.domain;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
 
 
 public class RoomDetailInfoShow extends BaseDomain{
@@ -84,5 +88,13 @@ public class RoomDetailInfoShow extends BaseDomain{
 
 	public void setPicturePaths(String picturePaths) {
 		this.picturePaths = picturePaths;
+	}
+	
+	public List<String> getPictPathList(){
+		if(StringUtils.isNotBlank(picturePaths)){
+			return Arrays.asList(picturePaths.split(","));
+		}else{
+			return null;
+		}
 	}
 }

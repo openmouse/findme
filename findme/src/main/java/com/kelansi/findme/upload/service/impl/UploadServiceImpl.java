@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import com.kelansi.findme.common.Message;
 import com.kelansi.findme.common.Setting;
 import com.kelansi.findme.db.process.MyBatisMapperProcessor;
 import com.kelansi.findme.domain.EnumEntryBean;
@@ -44,7 +45,7 @@ public class UploadServiceImpl implements UploadService {
 	
 	@Override
 	@Transactional
-	public void importByExcel(ExcelReader excel) throws IllegalArgumentException, IllegalAccessException {
+	public Message importByExcel(ExcelReader excel) throws IllegalArgumentException, IllegalAccessException {
 		Sheet sheet = excel.getSheet(0);
         int rowCount = sheet.getLastRowNum();
         if (rowCount < 1) {
@@ -63,6 +64,8 @@ public class UploadServiceImpl implements UploadService {
         }
         List<RoomDetailInfo> info1 = new ArrayList<RoomDetailInfo>();
         List<RoomDetailInfoShow> info2 = new ArrayList<RoomDetailInfoShow>();
+        //未导入条数
+        int failureCount = 0;
         for (int rowIndex = 1; rowIndex <= rowCount; rowIndex++) {
         	//room_detail
             RoomDetailInfo roomInfo = new RoomDetailInfo();
@@ -172,11 +175,17 @@ public class UploadServiceImpl implements UploadService {
                 	 }
                  }
              }
-             info1.add(roomInfo);
-             info2.add(roomInfoShow);
+             //当前库中不存在时才添加
+             if(!uploadMapper.findSameRoomDetail(myBatisMapperProcessor.processInsertMapper(roomInfo, RoomDetailInfo.class))){
+            	 info1.add(roomInfo);
+                 info2.add(roomInfoShow);
+             }else{
+            	 failureCount ++;
+             }
         }
         uploadMapper.insertRoomDetail(info1);
         uploadMapper.insertRoomDetailShow(info2);
+        return Message.success("message.upload.success", info1.size(), failureCount);
 	}
 	
 	private EnumEntryBean containDealer(String dealer, List<EnumEntryBean> values){

@@ -2,7 +2,10 @@
  * 
  */
 
-var kelansi = {base:'/findme'};
+var kelansi = {
+		base:'/findme',
+		file: "/findme/static/upload"
+	};
 (function($) {
 	//令牌	
 	$(document).ajaxSend(function(event, request, settings) {
