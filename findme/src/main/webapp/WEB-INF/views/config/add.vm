@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"><meta name="renderer" content="webkit" /><link rel="icon" href="static/favicon.ico" type="image/x-icon" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>新增检索配置</title>
+<meta charset="UTF-8">
+<link href="#static()/css/common.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<form id="inputForm" action="save.htm" method="post">
+		<table class="input firstTable">
+			<tr>
+				<th>
+					字段：
+				</th>
+				<td>
+					<select name="enumNum" id="enumNum">
+						#foreach($wordMapping in $wordMappings)
+							<option value="$wordMapping.enumNum">$wordMapping.field</option>
+						#end
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th>
+					相似形容词：
+				</th>
+				<td>
+					<select name="enumValue" id="enumValue">
+						<option value="">--请选择--</option>
+					</select>&nbsp;&nbsp;
+					<a href="delete.htm" id="enumUrl">删除当前形容词</a>
+				</td>
+			</tr>
+			<tr>
+				<th>
+					内容：
+				</th>
+				<td>
+					<input type="text" class="text" name="enumKey" id="enumKey"/>
+				</td>
+			</tr>
+			<tr>
+				<th>
+					数字类型形容词起始值：
+				</th>
+				<td>
+					<input type="text" class="text" id="numBegin" name="numBegin" />
+				</td>
+			</tr>
+			<tr>
+				<th>
+					数字类型形容词结束值：
+				</th>
+				<td>
+					<input type="text" class="text" id="numEnd" name="numEnd"/>
+				</td>
+			</tr>
+			<tr>
+				<th>
+					&nbsp;
+				</th>
+				<td>
+					<input type="submit" class="button" value="添加" />
+					<input type="button" id="return" class="button" value="返回" />
+				</td>
+			</tr>
+		</table>
+		<input type="hidden" id="msg" value='${message}'/>
+	</form>
+	<script src="#static()/lib/jquery/jquery-1.11.3.js"></script>
+	<script src="#static()/lib/jquery/jquery.validate.js"></script>
+	<script src="#static()/js/common.js"></script>
+	<script src="#static()/js/config/add.js"></script>
+</body>
+</html>

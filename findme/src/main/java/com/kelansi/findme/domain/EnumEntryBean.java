@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 
 public class EnumEntryBean {
 
+	private Long id;
+	
 	public String enumKey;
 	
 	public Integer enumValue;
@@ -75,5 +77,13 @@ public class EnumEntryBean {
 
 	public void setNumEnd(BigDecimal numEnd) {
 		this.numEnd = numEnd;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 }

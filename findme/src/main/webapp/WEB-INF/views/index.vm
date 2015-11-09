@@ -13,7 +13,7 @@
 
 <!--Header-part-->
 <div id="header">
-  <h1><a href="dashboard.html">Kelansi Admin</a></h1>
+  <img width="178px" height="65px" src="static/resources/images/kelansi.jpg"></img>
 </div>
 <!--close-Header-part--> 
 
@@ -31,10 +31,10 @@
 <!--sidebar-menu-->
 <div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-home"></i> Dashboard</a>
   <ul style="display: block;">
-    <li class="active menu"><a href="/findme/upload.htm" target="iframe"><span>Upload</span></a> </li>
+    <li class="active menu"><a href="/findme/upload.htm" target="iframe"><span>Upload Excel</span></a> </li>
     <li class="menu"><a href="/findme/upload/images.htm" target="iframe"><span>Upload Images</span></a> </li>
     <li class="menu"><a href="/findme/roomList.htm" target="iframe"><span>Rooms Detail</span></a> </li>
-    <li class="menu"><a href="index.html"><span>Config</span></a> </li>
+    <li class="menu"><a href="/findme/enumkey/config/add.htm" target="iframe"><span>Words Config</span></a> </li>
   </ul>
 </div>
 <div id="content">

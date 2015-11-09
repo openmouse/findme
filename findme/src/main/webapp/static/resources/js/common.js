@@ -6,6 +6,28 @@ var kelansi = {
 		base:'/findme',
 		file: "/findme/static/upload"
 	};
+//多语言
+function message(code) {
+	if (code != null) {
+		var content = messages[code] != null ? messages[code] : code;
+		if (arguments.length == 1) {
+			return content;
+		} else {
+			if ($.isArray(arguments[1])) {
+				$.each(arguments[1], function(i, n) {
+					content = content.replace(new RegExp("\\{" + i + "\\}", "g"), n);
+				});
+				return content;
+			} else {
+				$.each(Array.prototype.slice.apply(arguments).slice(1), function(i, n) {
+					content = content.replace(new RegExp("\\{" + i + "\\}", "g"), n);
+				});
+				return content;
+			}
+		}
+	}
+}
+
 (function($) {
 	//令牌	
 	$(document).ajaxSend(function(event, request, settings) {

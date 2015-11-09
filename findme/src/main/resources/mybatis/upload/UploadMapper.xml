@@ -15,6 +15,7 @@
 		<result column="type" property="type" jdbcType="INTEGER"/>
 		<result column="num_begin" property="numBegin" jdbcType="DECIMAL"/>
 		<result column="num_end" property="numEnd" jdbcType="DECIMAL"/>
+		<result column="id" property="id" jdbcType="BIGINT"/>
 	</resultMap>
 	
 	<resultMap type="com.kelansi.findme.domain.RoomDetailInfo" id="roomDetail">

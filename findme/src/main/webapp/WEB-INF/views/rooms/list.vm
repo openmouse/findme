@@ -1,7 +1,6 @@
 <html lang="en"><head>
 <title>Kelansi Admin</title>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="#static()/css/common.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -62,7 +61,7 @@
 				</tr>
 			#end
 		</table> 
-		#if($page.total != 0 && $page.total != 1)
+		#if($page.totalPages != 0 && $page.totalPages != 1)
 			<input type="hidden" id="total" value="$page.total" />
 			<input type="hidden" id="pageSize" name="pageSize" value="$page.pageSize" />
 			#set( $pageNumber = $page.pageNumber)
