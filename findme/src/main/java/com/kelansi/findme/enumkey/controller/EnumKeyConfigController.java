@@ -88,7 +88,12 @@ public class EnumKeyConfigController {
 			//经销商字段
 			if(enumEntry.getEnumValue() == -1){
 				Integer maxEnumValue = enumKeyConfigMapper.getMaxEnumValueByNum(enumEntry.getEnumNum());
-				enumEntry.setEnumValue(maxEnumValue + 1);
+				if(maxEnumValue != null){
+					enumEntry.setEnumValue(maxEnumValue + 1);
+				}else{
+					enumEntry.setEnumValue(1);
+				}
+				
 			}
 			enumKeyConfigMapper.save(enumEntry);
 		}catch(CommonException e){
@@ -100,8 +105,10 @@ public class EnumKeyConfigController {
 	}
 	
 	private void buildEnumEntry(EnumEntryBean enumEntry){
-		Integer enumNum = enumKeyConfigMapper.getEnumNumById(new Long(enumEntry.getEnumNum()));
-		enumEntry.setEnumNum(enumNum);
+		if(enumEntry.getEnumValue() != -1){
+			Integer enumNum = enumKeyConfigMapper.getEnumNumById(new Long(enumEntry.getEnumNum()));
+			enumEntry.setEnumNum(enumNum);
+		}
 	}
 	
 	/**

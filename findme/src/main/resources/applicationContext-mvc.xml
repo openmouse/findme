@@ -29,6 +29,7 @@
 			<mvc:mapping path="/**" />
 			<mvc:exclude-mapping path="/login.htm"/>
 			<mvc:exclude-mapping path="/submit.htm"/>
+			<mvc:exclude-mapping path="/search.htm**"/>
 			<bean id="loginInterceptor" class="com.kelansi.findme.interceptor.LoginInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
