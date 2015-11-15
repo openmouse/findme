@@ -13,11 +13,13 @@ public interface SearchMapper {
 
 	WordMappingBean getStrByMappingField(String keyword);
 	
-	EnumEntryBean getEnumValueByWords(String keyword);
+	List<EnumEntryBean> getEnumValueByWords(String keyword);
 
 	List<RoomDetailInfo> searchWithSql(@Param("sql")String sql);
 
 	List<WordMappingBean> findAllWordMappings();
 
 	List<EnumEntryBean> findAllEnumEntries();
+
+	List<EnumEntryBean> getNumEnumValueByWords(Number keyword);
 }

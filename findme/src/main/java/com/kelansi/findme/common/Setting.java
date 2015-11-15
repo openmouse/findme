@@ -20,6 +20,7 @@ public class Setting implements InitializingBean{
 
 	public static final String cookiePath="/";  
 	public static final String cookieDomain="";
+	public static final String imageUploadPath = "/static/upload/image/";
 	
 	private Map<Integer, WordMappingBean> wordMappings = new HashMap<Integer, WordMappingBean>();
 	private Map<String, EnumEntryBean> stringEnumEntries = new HashMap<String, EnumEntryBean>();

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kelansi.findme.enumkey.dao.EnumKeyConfigMapper" >
+	
+	<resultMap type="com.kelansi.findme.domain.EnumEntryBean" id="enumEntry">
+		<result column="enum_key" property="enumKey" jdbcType="VARCHAR"/>
+		<result column="enum_value" property="enumValue" jdbcType="INTEGER"/>
+		<result column="enum_num" property="enumNum" jdbcType="INTEGER"/>
+		<result column="type" property="type" jdbcType="INTEGER"/>
+		<result column="num_begin" property="numBegin" jdbcType="DECIMAL"/>
+		<result column="num_end" property="numEnd" jdbcType="DECIMAL"/>
+		<result column="id" property="id" jdbcType="BIGINT"/>
+	</resultMap>
+	
+	<select id="getEnumEntryBeanByNum" resultMap="enumEntry" parameterType="INT">
+		select * from findme_enum_entry where enum_num = #{enumNum, jdbcType=INTEGER}
+	</select>
+	
+	<select id="getMaxEnumValueByNum" resultType="INT" parameterType="INT">
+		select max(enum_value) from findme_enum_entry where enum_num = #{enumNum, jdbcType=INTEGER}
+	</select>
+	
+	<select id="getEnumNumById" resultType="INT" parameterType="java.lang.Long">
+		select enum_num from findme_enum_entry where id = #{id}
+	</select>
+	
+	<insert id="save" parameterType="com.kelansi.findme.domain.EnumEntryBean">
+		insert into findme_enum_entry (enum_key, enum_value, enum_num, type, num_begin, num_end) 
+		values (#{enumKey}, #{enumValue}, #{enumNum}, #{type}, #{numBegin}, #{numEnd})
+	</insert>
+	
+	<delete id="delete" parameterType="java.lang.Long">
+		delete from findme_enum_entry where id = #{id}
+	</delete>
+</mapper>

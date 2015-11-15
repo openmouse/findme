@@ -280,11 +280,5 @@
 		$pageNumber.val(1);
 	});
 	
-	// 列表查询
-	if (location.search != "" && location.search.indexOf("noCookie") == -1) {
-		addCookie("listQuery", location.search);
-	} else if(location.search.indexOf("noCookie") == -1){
-		removeCookie("listQuery");
-	}
 
 })(jQuery);

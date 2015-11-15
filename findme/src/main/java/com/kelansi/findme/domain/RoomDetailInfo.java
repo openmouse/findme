@@ -8,27 +8,27 @@ public class RoomDetailInfo extends BaseDomain{
 	 */
 	private static final long serialVersionUID = -5608034604878640779L;
 	
-	private Integer dealer;
+	public Integer dealer;
 	
 	/** 枚举形式 房型*/
-	private Integer roomModel;
+	public Integer roomModel;
 	
 	/** 枚举形式 面积 */
-	private Integer size;
+	public Integer size;
 	/** 枚举范围 层高 */
-	private Integer floorHeight;
+	public Integer floorHeight;
 	
 	/** 功能空间 */
-	private Integer functionSpace;
+	public Integer functionSpace;
 	
 	/** 枚举形式 风格 */
-	private Integer style;
+	public Integer style;
 	
 	/** 图片地址 */
-	private String picturePaths;
+	public String picturePaths;
 	
 	/** 微信服务器端保存的商品的上传ID */
-	private String mediaIds;
+	public String mediaIds;
 
 	public Integer getFloorHeight() {
 		return floorHeight;

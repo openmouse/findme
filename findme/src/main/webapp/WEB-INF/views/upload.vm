@@ -4,14 +4,14 @@
 <link rel="icon" href="#base()/favicon.ico" type="image/x-icon" />
 <link rel="shortcut icon" href="#base()/favicon.ico" type="image/x-icon" />
 <link href="#static()/css/common.css" rel="stylesheet" type="text/css" />
-<link href="#static()/css/upload.css" rel="stylesheet" type="text/css" />
+<link href="#static()/css/uploadify.css" rel="stylesheet" type="text/css" />
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title>上传excel</title>
 <meta name="author" content="kelansi Team" />
 <meta name="copyright" content="kelansi" />
 </head>
 <body>
-	<form id="inputForm" action="upload/doUpload.jhtml" method="POST" enctype="multipart/form-data">
+	<form id="inputForm" action="upload/doUpload.htm" method="POST" enctype="multipart/form-data">
 		<table class="input tabContent firstTable">
 			<tr>
 				<th>
@@ -32,10 +32,12 @@
 	</form>
  
 </div>
+<input type="hidden" id="rtMessage" value="#if($rtMessage) ${rtMessage} #end"/>
 </body>
 <script src="#static()/lib/jquery/jquery-1.11.3.js"></script>
 <script src="#static()/lib/fileupload/js/jquery.iframe-transport.js" ></script>
 <script src="#static()/lib/fileupload/js/vendor/jquery.ui.widget.js" ></script>
 <script src="#static()/lib/fileupload/js/jquery.fileupload.js"></script>
+<script src="#static()/js/common.js"></script>
 <script src="#static()/upload/upload.js"></script>
 </html>

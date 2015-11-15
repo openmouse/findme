@@ -28,4 +28,11 @@ public interface UploadMapper {
 	void insertRoomDetailShow(List<RoomDetailInfoShow> list);
 
 	Boolean findSameRoomDetail(Map<String,Object> map);
+	
+	/**
+	 * 更新media_id
+	 * 
+	 * @param map
+	 */
+	void updateMediaId(Map<String,Object> map);
 }

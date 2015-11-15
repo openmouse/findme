@@ -19,4 +19,9 @@ $(function () {
  
         dropZone: $('#dropzone')
     });
+    
+    var rtMessage = $("#rtMessage");
+	if(rtMessage.val() && rtMessage.val() != ''){
+		alert(rtMessage.val());
+	}
 });

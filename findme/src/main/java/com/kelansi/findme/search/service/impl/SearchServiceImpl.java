@@ -22,6 +22,7 @@ import com.kelansi.findme.domain.RoomDetailInfo;
 import com.kelansi.findme.domain.WordMappingBean;
 import com.kelansi.findme.search.dao.SearchMapper;
 import com.kelansi.findme.search.service.SearchService;
+import com.kelansi.findme.utils.NumberUtils;
 import com.kelansi.findme.word.mapping.WXWordsProcessor;
 
 @Service("searchServiceImpl")
@@ -56,10 +57,15 @@ public class SearchServiceImpl implements SearchService{
 		Iterator<String> iterator =  keywords.iterator();
 		List<WordMappingBean> fields = new ArrayList<WordMappingBean>();
 		Map<Integer, EnumEntryBean> enumValues = new HashMap<Integer, EnumEntryBean>();
+		int enumNum = -1;
 		while(iterator.hasNext()){
 			String keyword = iterator.next();
-			fields.addAll(this.getFieldsByKeyword(keyword, iterator));
-			enumValues.putAll(this.getEnumValuesByKeyword(keyword, iterator));
+			List<WordMappingBean> wmBeans = this.getFieldsByKeyword(keyword, iterator);
+			if(wmBeans.size() > 0){
+				enumNum = wmBeans.get(0).getEnumNum();
+			}
+			fields.addAll(wmBeans);
+			enumValues.putAll(this.getEnumValuesByKeyword(keyword, iterator, enumNum));
 		}
 		String finalSql = this.buildSql(fields, enumValues, sql);
 		return searchMapper.searchWithSql(finalSql);
@@ -72,11 +78,12 @@ public class SearchServiceImpl implements SearchService{
 			WordMappingBean field = fields.get(i);
 			Integer enumKey = field.getEnumNum();
 			EnumEntryBean enumValue = enumValues.get(enumKey);
+			String conditionSql = null;
 			//若在关键句分词中未发现当前字段的形容词则直接continue
 			if(enumValue == null){
-				continue;
+				conditionSql = this.buildConditionSql(field, null);;
 			}
-			String conditionSql = this.buildConditionSql(field, enumValue);
+			conditionSql = this.buildConditionSql(field, enumValue);
 			if(!mappingEnums.contains(conditionSql)){
 				mappingEnums.add(conditionSql);
 			}
@@ -98,7 +105,11 @@ public class SearchServiceImpl implements SearchService{
 		StringBuilder newStr = new StringBuilder();
 		newStr.append(field.getMappingStr());
 		newStr.append(" = ");
-		newStr.append(enumValue.getEnumValue());
+		if(enumValue == null){
+			newStr.append("-1");
+		}else{
+			newStr.append(enumValue.getEnumValue());
+		}
 		return newStr.toString();
 	}
 	
@@ -114,15 +125,38 @@ public class SearchServiceImpl implements SearchService{
 		return fields;
 	}
 	
-	private Map<Integer, EnumEntryBean> getEnumValuesByKeyword(String keyword, Iterator<String> iterator){
+	private Map<Integer, EnumEntryBean> getEnumValuesByKeyword(String keyword, Iterator<String> iterator, int enumNum){
 		Map<Integer, EnumEntryBean> enumValues  = new HashMap<Integer, EnumEntryBean>();
 		if(StringUtils.isNotBlank(keyword)){
-			EnumEntryBean enumValue = searchMapper.getEnumValueByWords(keyword);
-			if(enumValue != null ){
+			List<EnumEntryBean> dbEnumValues = null;
+			if(StringUtils.isNumeric(keyword)){
+				dbEnumValues = searchMapper.getNumEnumValueByWords(Integer.parseInt(keyword));
+			}else if(NumberUtils.isBigDecimal(keyword)){
+				dbEnumValues = searchMapper.getNumEnumValueByWords(Double.parseDouble(keyword));
+			}else{
+				dbEnumValues = searchMapper.getEnumValueByWords(keyword);
+			}
+			
+			if(enumNum != -1){
+				this.filterOtherEnum(dbEnumValues, enumNum);
+			}
+			if(dbEnumValues.size() != 0 ){
 				iterator.remove();
-				enumValues.put(enumValue.getEnumNum(), enumValue);
+				for(EnumEntryBean enumValue : dbEnumValues){
+					enumValues.put(enumValue.getEnumNum(), enumValue);
+				}
 			}
 		}
 		return enumValues;
+	}
+	
+	private void filterOtherEnum(List<EnumEntryBean> enumValue, int enumNum){
+		Iterator<EnumEntryBean> iterator = enumValue.iterator();
+		while(iterator.hasNext()){
+			EnumEntryBean bean = iterator.next();
+			if(bean.getEnumNum() != enumNum){
+				iterator.remove();
+			}
+		}
 	}
 }

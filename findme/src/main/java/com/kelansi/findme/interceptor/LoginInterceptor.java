@@ -6,16 +6,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.kelansi.findme.domain.User;
 
-public class LoginInteceptor extends HandlerInterceptorAdapter {
+public class LoginInterceptor extends HandlerInterceptorAdapter {
 
-	@Value("${url.logout.to}")
-	private String logoutTo;
+	private String logoutTo = "/login.htm";
 	
 	@Override
 	public void postHandle(HttpServletRequest request,

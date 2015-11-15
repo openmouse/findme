@@ -6,6 +6,19 @@ var kelansi = {
 		base:'/findme',
 		file: "/findme/static/upload"
 	};
+
+var setting = {
+		priceScale: "2",
+		priceRoundType: "roundHalfUp",
+		currencySign: "￥",
+		currencyUnit: "元",
+		uploadImageExtension: "jpg,jpeg,bmp,gif,png",
+		uploadFlashExtension: "swf,flv",
+		uploadMediaExtension: "swf,flv,mp3,wav,avi,rm,rmvb",
+		uploadFileExtension: "zip,rar,7z,doc,docx,xls,xlsx,ppt,pptx",
+		cartMaxQuantity: 1000000
+	};
+
 //多语言
 function message(code) {
 	if (code != null) {

@@ -8,10 +8,12 @@ $(function() {
 		
 	$('body').append('<input type="hidden" name="token" value="' + getCookie("token") + '" />');
 	
+	var errorFlag = false;
+	
 	setTimeout(function(){
 		$('#file_upload').uploadify({
-	        'swf'      : kelansi.base + '/js/imageUpload/uploadify.swf',
-	        'uploader' : kelansi.base + '/admin/product_import/imageUpload.jhtml',
+	        'swf'      : kelansi.base + '/static/resources/js/imageUpload/uploadify.swf',
+	        'uploader' : kelansi.base + '/imageUpload.htm',
 	        'fileTypeExts'  : extensions,
 	        'fileTypeDesc' : '图片文件',
 	        'formData' : {'token' : $("input[name='token']").val()},
@@ -22,7 +24,13 @@ $(function() {
 	        'removeCompleted' : false,
 	        'removeTimeout' : false,
 	        'onUploadSuccess' : function(file, data, response) {
-	        	$('#' + file.id).addClass("success");
+	        	var dataset = $.parseJSON(data);
+	        	if(!errorFlag){
+		        	if(dataset.type == "error" || dataset.type == "warn"){
+		        		errorFlag = true;
+		        		alert(dataset.content);
+		        	}
+	        	}
 	        },
 	        'onFallback' : function() {
 	        	alert("未检测到Flash插件.请安装Flash以便正常运行！");
@@ -64,6 +72,7 @@ $(function() {
 	}, 10);
 	
 	$("#upload").click(function(){
+		errorFlag = false;
 		$('#file_upload').uploadify('upload', '*');
 	});
 });

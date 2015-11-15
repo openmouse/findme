@@ -69,7 +69,10 @@
 	</insert>
 	
 	<select id="findSameRoomDetail" resultType="boolean" parameterType="map">
-		select if(count(id) > 1, true, false) from findme_room_detail where dealer = #{dealer} and room_model = #{roomModel} and size = #{size} and style = {#style} and picture_paths = #{picturePaths} and floor_height = #{floorHeight} and fucntion_space = #{functionSpace}
+		select if(count(id) >= 1, true, false) from findme_room_detail where dealer = #{dealer} and room_model = #{roomModel} and size = #{size} and style = #{style} and picture_paths = #{picturePaths} and floor_height = #{floorHeight} and function_space = #{functionSpace}
 	</select>
 	
+	<update id="updateMediaId" parameterType="map">
+		update findme_room_detail set media_ids = (case when media_ids is null then #{mediaId} else CONCAT(media_ids,',',#{mediaId}) end) where picture_paths like #{picturePathStr}
+	</update>
 </mapper>

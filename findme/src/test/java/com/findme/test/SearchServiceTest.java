@@ -20,7 +20,7 @@ public class SearchServiceTest {
 	 */
 //	@Test
 //	public void test1(){
-//		searchService.searchRoomInfos("风格温馨,样子温暖");
+//		searchService.searchRoomInfos("风格温馨,风格温暖");
 //	}
 	
 	/**
@@ -28,6 +28,6 @@ public class SearchServiceTest {
 	 */
 	@Test
 	public void test2(){
-		searchService.searchRoomInfos("房子要温馨,温暖");
+		searchService.searchRoomInfos("房子风格要温馨,风格温暖,层高在3左右,面积3.5平方左右,经销商是大家");
 	}
 }

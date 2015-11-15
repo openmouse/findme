@@ -168,10 +168,15 @@ public class UploadServiceImpl implements UploadService {
                 		 }
                 	 }
                  }else if(cellIndex == 6){//全景图
-                	 //TODO
                 	 if(StringUtils.isNotBlank(cellValue)){
-                		 //roomInfo.setRoomModel(bean.getEnumValue());
-            			 roomInfoShow.setPicturePaths(cellValue);
+                		 List<String> paths = new ArrayList<String>();
+                		 String srcPath = Setting.imageUploadPath;
+                		 String path = srcPath.substring(1, srcPath.length());
+                		 for(String filePath : cellValue.split(",")){
+                			 paths.add(path + filePath);
+                		 }
+            			 roomInfoShow.setPicturePaths(StringUtils.join(paths, ","));
+            			 roomInfo.setPicturePaths(StringUtils.join(paths, ","));
                 	 }
                  }
              }
@@ -182,6 +187,9 @@ public class UploadServiceImpl implements UploadService {
              }else{
             	 failureCount ++;
              }
+        }
+        if(info1.size() == 0 || info2.size() == 0){
+        	return Message.warn("导入成功 0 条 ,重复记录 " + failureCount + " 条");
         }
         uploadMapper.insertRoomDetail(info1);
         uploadMapper.insertRoomDetailShow(info2);
@@ -219,10 +227,10 @@ public class UploadServiceImpl implements UploadService {
 						EnumEntryBean enumObj = (EnumEntryBean) object;
 						return enumNum.equals(enumObj.getEnumNum())
 								&& delValue.compareTo(enumObj.getNumBegin()) >= 0
-								&& delValue.compareTo(enumObj.getNumEnd()) < 0;
+								&& delValue.compareTo(enumObj.getNumEnd()) <= 0;
 					}
 				});
-		return target.get(0);
+		return target.size() == 0 ? null : target.get(0);
 	}
 
 }

@@ -21,7 +21,7 @@
 <!--top-Header-menu-->
 <div id="user-nav" class="navbar navbar-inverse">
   <ul class="nav" style="width: auto; margin: 0px;">
-    <li class=""><a title="" href="login.html"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
+    <li class=""><a title="" href="logout.htm"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
   </ul>
 </div>
 <!--close-top-Header-menu-->
@@ -35,12 +35,13 @@
     <li class="menu"><a href="/findme/upload/images.htm" target="iframe"><span>Upload Images</span></a> </li>
     <li class="menu"><a href="/findme/roomList.htm" target="iframe"><span>Rooms Detail</span></a> </li>
     <li class="menu"><a href="/findme/enumkey/config/add.htm" target="iframe"><span>Words Config</span></a> </li>
+    <li class="menu"><a href="/findme/user/changePwdView.htm" target="iframe"><span>User Info</span></a> </li>
   </ul>
 </div>
 <div id="content">
 <!--breadcrumbs-->
   <div id="content-header">
-    <div id="breadcrumb"> <a href="index.html" class="tip-bottom" data-original-title="Go to Home"><i class="icon-home"></i> Home</a></div>
+    <div id="breadcrumb"> <a href="index.htm" class="tip-bottom" data-original-title="Go to Home"><i class="icon-home"></i> Home</a></div>
     <iframe name = "iframe" id="iframepage" frameborder="0" width="100%" height="100%"></iframe>
   </div>
 <!--End-breadcrumbs-->

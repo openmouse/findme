@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"><meta name="renderer" content="webkit" />
+<link rel="icon" href="#base()/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="#base()/favicon.ico" type="image/x-icon" />
+<link href="#static()/css/common.css" rel="stylesheet" type="text/css" />
+<link href="#static()/css/upload/uploadify.css" rel="stylesheet" type="text/css" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>上传excel</title>
+<meta name="author" content="kelansi Team" />
+<meta name="copyright" content="kelansi" />
+</head>
+<body>
+	<form id="inputForm" action="http://file.api.weixin.qq.com/cgi-bin/media/upload" method="POST" enctype="multipart/form-data">
+		<table class="input tabContent firstTable">
+			<tr>
+				<th>
+					选择文件:
+				</th>
+				<td>
+					<input type="file" name="excel" class="file_upload" />
+				</td>
+			</tr>
+			<tr>
+				<th>
+				</th>
+				<td>
+					<input type="button" class="button" id="submitButton" value="确定" />
+				</td>
+			</tr>
+		</table>
+		<input type="hidden" name="access_token" id="accessToken" value="${accessToken}"/>
+		<input type="hidden" name="type" id="type" value="image"/>
+	</form>
+</div>
+</body>
+<script src="#static()/lib/jquery/jquery-1.11.3.js"></script>
+<script src="#static()/lib/fileupload/js/jquery.iframe-transport.js" ></script>
+<script src="#static()/lib/fileupload/js/vendor/jquery.ui.widget.js" ></script>
+<script src="#static()/lib/fileupload/js/jquery.fileupload.js"></script>
+<script src="#static()/lib/jquery/jquery.form.js"></script>
+<script src="#static()/js/common.js"></script>
+<script src="#static()/js/imageUpload/wxImages.js"></script>
+</html>
