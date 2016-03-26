@@ -6,6 +6,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kelansi.findme.login.service.LoginService;
 
+/**
+ * 
+ * @author wenliangfan
+ *
+ */
 @Controller
 public class LoginController {
 	
